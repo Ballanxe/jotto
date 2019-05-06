@@ -1,17 +1,20 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
 import checkPropTypes from 'check-prop-types';
 
 import { findByTestAttr, checkProps } from '../test/testUtils'
 import Congrats from './Congrats';
 
-Enzyme.configure({adapter: new EnzymeAdapter()}); 
+
 
 const defaultProps = { success:false };
 
 /**
-
+	* Factory function to create a ShallowWrapper for the GuessedWords component.
+	* @function setup
+	* @param {object} props - Component props specific to this setup.
+	* @returns {ShallowWrapper}
 */
 
 const setup = (props={}) => {
