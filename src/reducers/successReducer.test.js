@@ -2,6 +2,10 @@ import { actionTypes } from '../actions';
 import successReducer from './successReducer';
 
 
+// Some folks recomend not doing reduce and action unit testing, instead 
+// test them in integration test 
+
+
 test('returns default initial state of `false` when no action is passed', () =>{
 
 	// Make sure the test pass object to the action 
