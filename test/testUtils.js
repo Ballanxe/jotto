@@ -11,6 +11,10 @@ import rootReducer from '../src/reducers';
 * @returns {Store} - Redux store.
 */
 
+
+// Instead of passing the actual Store, you can use a package named redux-mock-store
+// This is recommended if you want to test intermediate actions as loading while wating
+// a response 
 export const storeFactory = (initialState) => {
 	return createStore(rootReducer, initialState); 
 }
