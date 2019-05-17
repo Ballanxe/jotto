@@ -2,6 +2,7 @@ import checkPropTypes from 'check-prop-types';
 import { createStore } from 'redux';
 
 import rootReducer from '../src/reducers';
+import {middlewares} from '../src/configureStore';
 
 /**
 * Create a testing store with imported reducers, middlewares, and initial state.
@@ -16,7 +17,8 @@ import rootReducer from '../src/reducers';
 // This is recommended if you want to test intermediate actions as loading while wating
 // a response 
 export const storeFactory = (initialState) => {
-	return createStore(rootReducer, initialState); 
+	const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore)
+	return createStoreWithMiddleware(rootReducer, initialState); 
 }
 
 /**
