@@ -6,9 +6,6 @@ import { guessWord } from './actions';
 
 export class UnconnectedInput extends Component {
 
-	/**
-
-	*/
 	constructor(props){
 		super(props)
 		this.inputBox = React.createRef()
@@ -24,11 +21,10 @@ export class UnconnectedInput extends Component {
 			this.props.guessWord(guessedWord)
 		}
 
+		this.inputBox.current.value = '';
+
 	}	
 
-	/**
-	
-	*/
 	render(){
 		const contents = this.props.success 
 		? null
