@@ -1,8 +1,9 @@
 import React from 'react';
-import App from './App';
+
 import { shallow } from 'enzyme';
 
 import { findByTestAttr, storeFactory } from '../test/testUtils';
+import App, { UnconnectedApp } from './App';
 
 /**
 * Factory function to create a ShallowWrapper for the GuessedWords component.
@@ -10,9 +11,9 @@ import { findByTestAttr, storeFactory } from '../test/testUtils';
 * @param {object} initialState - Initial state for this setup
 * @returns {shallowWrapper}
 */
-const setup = (initialState={}) => {
+const setup = (initialState={}, props={}) => {
 	const store = storeFactory(initialState);
-	const wrapper = shallow(<App store={store}/>).dive().dive();
+	const wrapper = shallow(<App store={store} props={props}/>).dive().dive();
 	return wrapper
 }
 
@@ -41,5 +42,25 @@ describe('redux properties', () => {
 		const getSecretWordProp = wrapper.instance().props.getSecretWord
 		expect(getSecretWordProp).toBeInstanceOf(Function);
 	})
+
+test('`getSecretWord` runs on App mount', () => {
+	const getSecretWordMock = jest.fn();
+
+	const props = {
+		getSecretWord: getSecretWordMock,
+		success: false,
+		guessedWords: []
+	}
+
+	// shallow component with mock function
+	const wrapper = shallow(<UnconnectedApp {...props}/>)
+	// const wrapper = setup({},props2)
+	// runs the lfunction in the instance
+	wrapper.instance().componentDidMount()
+	// 
+	const getSecretWordCallCount = getSecretWordMock.mock.calls.length;
+
+	expect(getSecretWordCallCount).toBe(1)
+})
 
 })
